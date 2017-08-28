@@ -14,7 +14,8 @@ module.exports = {
         lang:String,
         theme:String,
         height:true,
-        width:true
+        width:true,
+        readonly:Boolean
     },
     data: function () {
         return {
@@ -40,6 +41,7 @@ module.exports = {
         var vm = this;
         var lang = this.lang||'text';
         var theme = this.theme||'chrome';
+        var readOnly = this.readonly;
 
         require('brace/ext/emmet');
 
@@ -51,6 +53,7 @@ module.exports = {
         editor.setOption("enableEmmet", true);
         editor.getSession().setMode('ace/mode/'+lang);
         editor.setTheme('ace/theme/'+theme);
+        editor.setReadOnly(readOnly);
         editor.setValue(this.value,1);
 
         editor.on('change',function () {
